@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "ZANNI Beauty Salon"
+description = "A polished three-page demo website for ZANNI Beauty Salon in Tirona, Dasmariñas, Cavite, focused on confident beauty, clear services, and effortless contact."
+version = "1.0.0"
+id = "artifacts/zanni-beauty-salon"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21008
+
+[services.development]
+run = "pnpm --filter @workspace/zanni-beauty-salon run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/zanni-beauty-salon", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/zanni-beauty-salon/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21008"
+BASE_PATH = "/"
