@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ArrowDownRight, ArrowUpRight, ChevronDown, Facebook, MapPin, Menu, Phone, Sparkles, X } from 'lucide-react';
 import { Link, Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
@@ -13,8 +13,8 @@ import './index.css';
 const queryClient = new QueryClient();
 const facebookUrl = 'https://www.facebook.com/ZANNIBeautySalon/';
 const mapUrl = 'https://www.google.com/maps/search/?api=1&query=Tirona+Ave+Dasmarinas+Cavite+Philippines';
-const phoneNumber = '+63 927 882 9513';
-const telNumber = 'tel:+639278829513';
+const phoneNumber = '+63 915 712 9091';
+const telNumber = 'tel:+639157129091';
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -59,6 +59,16 @@ const serviceGroups = [
 
 function SectionLabel({ children }: { children: ReactNode }) { return <p className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.25em] text-primary"><span className="h-px w-8 bg-accent" />{children}</p>; }
 
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location]);
+
+  return null;
+}
+
 function Home() {
   return <Shell><main>
     <section className="mx-auto grid max-w-[1320px] gap-10 px-6 pb-20 pt-10 md:grid-cols-[.82fr_1.18fr] md:items-end md:gap-16 md:px-10 md:pb-28 md:pt-16"><div className="animate-rise-in pb-2 md:pb-14"><SectionLabel>Tirona · Dasmariñas</SectionLabel><h1 className="mt-7 max-w-[650px] font-serif text-[clamp(3.8rem,8vw,8.8rem)] leading-[.88] tracking-[-.06em]">Feel good<br /><em className="text-primary">in your skin.</em></h1><p className="mt-8 max-w-[420px] text-[15px] leading-7 text-muted-foreground">A warm, thoughtful salon experience for the way you want to feel today. Come for a little reset. Leave feeling more like yourself.</p><div className="mt-9 flex flex-wrap items-center gap-5"><Link href="/services" className="group flex items-center gap-3 rounded-full bg-primary px-6 py-4 text-[10px] font-bold uppercase tracking-[.17em] text-primary-foreground transition hover:-translate-y-0.5" data-testid="link-hero-services">Explore services <ArrowUpRight size={15} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></Link><a href={facebookUrl} target="_blank" rel="noreferrer" className="link-underline text-[10px] font-bold uppercase tracking-[.17em] text-foreground/65 hover:text-primary" data-testid="link-hero-facebook">Message us on Facebook</a></div></div><div className="animate-fade-in relative min-h-[440px] overflow-hidden rounded-[11rem_11rem_1rem_1rem] bg-muted md:min-h-[650px]"><img src={heroImage} alt="Woman with sleek dark hair in warm studio light" className="image-editorial h-full w-full object-cover object-center" data-testid="img-home-hero" /><div className="absolute bottom-5 left-5 flex items-center gap-3 rounded-full bg-background/90 px-5 py-3 text-[10px] font-bold uppercase tracking-[.17em] text-foreground/70 shadow-lg"><Sparkles size={14} className="text-accent" />Feel like yourself</div></div></section>
@@ -85,5 +95,5 @@ function Contact() {
 function NotFound() { return <Shell><main className="mx-auto min-h-[60vh] max-w-[1320px] px-6 py-24 md:px-10"><SectionLabel>Page not found</SectionLabel><h1 className="mt-6 font-serif text-6xl">Let’s go <em className="text-primary">home.</em></h1><Link href="/" className="mt-8 inline-flex rounded-full border border-primary px-5 py-3 text-[10px] font-bold uppercase tracking-[.17em] text-primary">Back to home</Link></main></Shell>; }
 
 function Router() { return <ErrorBoundary resetKey={useLocation()[0]}><Switch><Route path="/" component={Home} /><Route path="/services" component={Services} /><Route path="/contact" component={Contact} /><Route component={NotFound} /></Switch></ErrorBoundary>; }
-function App() { return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}><Router /></WouterRouter><Toaster /></TooltipProvider></QueryClientProvider>; }
+function App() { return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}><ScrollToTop /><Router /></WouterRouter><Toaster /></TooltipProvider></QueryClientProvider>; }
 export default App;
