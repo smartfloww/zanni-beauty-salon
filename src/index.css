@@ -330,14 +330,30 @@
 
 @keyframes rise-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes page-intro { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes menu-drop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes float-gently { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-5px) rotate(1deg); } }
 .animate-rise-in { animation: rise-in .7s cubic-bezier(.22,1,.36,1) both; }
 .animate-fade-in { animation: fade-in .8s ease both; }
+main > section:first-child { animation: page-intro .75s cubic-bezier(.22,1,.36,1) both; }
+.mobile-menu-panel { animation: menu-drop .25s cubic-bezier(.22,1,.36,1) both; transform-origin: top center; }
+.logo-stamp { animation: float-gently 6s ease-in-out infinite; }
 .delay-1 { animation-delay: .12s; }
 .delay-2 { animation-delay: .22s; }
 .delay-3 { animation-delay: .34s; }
 .editorial-rule { height: 1px; background: hsl(var(--foreground) / .18); }
 .image-editorial { filter: saturate(.78) contrast(.98); transition: transform .7s cubic-bezier(.22,1,.36,1), filter .7s ease; }
 .image-editorial:hover { filter: saturate(.98) contrast(1.02); transform: scale(1.025); }
+.gallery-frame { position: relative; isolation: isolate; transform: translateZ(0); animation: rise-in .75s cubic-bezier(.22,1,.36,1) both; transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease; }
+.gallery-frame::after { content: ''; position: absolute; inset: 0; border: 1px solid hsl(var(--foreground) / .12); border-radius: inherit; pointer-events: none; transition: border-color .45s ease; }
+.gallery-frame:hover { transform: translateY(-5px); box-shadow: 0 16px 30px hsl(var(--foreground) / .09); }
+.gallery-frame:hover::after { border-color: hsl(var(--primary) / .38); }
+.gallery-frame:nth-child(2) { animation-delay: .08s; }
+.gallery-frame:nth-child(3) { animation-delay: .16s; }
+.gallery-frame:nth-child(4) { animation-delay: .24s; }
+.gallery-frame:nth-child(5) { animation-delay: .32s; }
+.location-card { transition: transform .4s cubic-bezier(.22,1,.36,1), border-color .4s ease, box-shadow .4s ease; }
+.location-card:hover { transform: translateY(-4px); border-color: hsl(var(--primary) / .3); box-shadow: 0 12px 26px hsl(var(--foreground) / .06); }
 .link-underline { position: relative; }
 .link-underline::after { content: ''; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .3s ease; }
 .link-underline:hover::after { transform: scaleX(1); transform-origin: left; }
