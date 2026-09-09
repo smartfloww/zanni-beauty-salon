@@ -52,13 +52,14 @@ const locations: LocationDetails[] = [
 const mapEmbedUrl = (location: LocationDetails) => `https://www.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&output=embed`;
 const mapOpenUrl = (location: LocationDetails) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.mapQuery)}`;
 
+const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const publicImages = {
-  hairOne: '/images/hairs1.jpg',
-  hairTwo: '/images/hairs2.jpg',
-  hairThree: '/images/hairs3.jpg',
-  nailsOne: '/images/nails1.jpg',
-  nailsTwo: '/images/nails2.jpg',
-  logo: '/images/logo.png',
+  hairOne: assetPath('images/hairs1.jpg'),
+  hairTwo: assetPath('images/hairs2.jpg'),
+  hairThree: assetPath('images/hairs3.jpg'),
+  nailsOne: assetPath('images/nails1.jpg'),
+  nailsTwo: assetPath('images/nails2.jpg'),
+  logo: assetPath('images/logo.png'),
 };
 
 function Logo() {
